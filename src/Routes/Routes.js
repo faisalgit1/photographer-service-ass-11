@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Blogs from '../components/Pages/Blogs';
+import Home from '../components/Pages/Home';
 
 import Login from '../components/Pages/Login'
 import PhotographerCards from '../components/Pages/PhotographerCards';
@@ -13,6 +14,10 @@ const routes = createBrowserRouter([{
     path: '/',
     element: <Main></Main>,
     children: [
+        {
+            path: '/',
+            element: <Home></Home>
+        },
         {
             path: '/phographer-select',
             loader: () => fetch('http://localhost:5000/data'),
