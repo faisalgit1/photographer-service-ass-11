@@ -1,4 +1,4 @@
-
+import { sendPasswordResetEmail } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,8 @@ import { AuthContext } from '../../Context/AuthProvider';
 const Login = () => {
     const [error, setError] = useState(null)
     const { signIn, auth, googleSignIn } = useContext(AuthContext)
+    const [usermail, setUsermail] = useState('')
+
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -48,6 +50,23 @@ const Login = () => {
             })
     }
 
+    const handleEmailInput = e => {
+        e.preventDefault()
+        const email = e.target.value
+
+        setUsermail(email)
+    }
+    const resetPasswrd = () => {
+
+        sendPasswordResetEmail(auth, usermail)
+            .then(() => {
+                toast.success('Please Check Your Email box to reset your Email Password')
+            })
+            .catch(error => {
+                console.log('error', error);
+                setError(error.message)
+            })
+    }
 
 
 
@@ -58,13 +77,13 @@ const Login = () => {
                 <form onSubmit={handleSubmit} novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <label for="username" className="block dark:text-gray-400">Email</label>
-                        <input type="text" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 bg-sky-200 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <input onBlur={handleEmailInput} type="text" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 bg-sky-200 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <div className="space-y-1 text-sm">
                         <label for="password" className="block dark:text-gray-400">Password</label>
                         <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md bg-sky-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                         <div className="flex justify-end text-xs dark:text-gray-400">
-                            <Link  >Forgot Password?</Link>
+                            <Link onClick={resetPasswrd} >Forgot Password?</Link>
                         </div>
                     </div>
                     <button className="block w-full  p-3 text-center rounded-sm dark:text-red-900 bg-violet-400 hover:bg-violet-700">Sign In</button>
