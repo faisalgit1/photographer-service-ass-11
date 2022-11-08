@@ -40,6 +40,12 @@ const AuthProvider = ({ children }) => {
     }
 
 
+    // User profie 
+    const setuserProfile = (profile) => {
+        setLoading(true)
+        return updateProfile(auth.currentUser, profile)
+    }
+
 
 
     // Log out
@@ -51,6 +57,7 @@ const AuthProvider = ({ children }) => {
     const authInfo = {
         user,
         signUp,
+        setuserProfile,
         logOut,
         googleSignIn,
         signIn,
