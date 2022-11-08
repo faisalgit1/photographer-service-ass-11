@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react';
-
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 
 const Register = () => {
-    const { signUp } = useContext(AuthContext)
+    const { signUp, setuserProfile } = useContext(AuthContext)
     const [error, setError] = useState('')
-
 
 
     const handleSubmit = e => {
@@ -20,14 +19,26 @@ const Register = () => {
         const password = form.password.value;
 
         console.log(name, photoURL, email, password);
-
+        if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
+            setError('Please provide at least two uppercase');
+            return;
+        }
+        if (password.length < 6) {
+            setError('Please should be at least 6 characters.');
+            return;
+        }
+        if (!/(?=.*[!@#$&*])/.test(password)) {
+            setError('Please add at least one special character');
+            return;
+        }
         setError('');
         signUp(email, password)
             .then(result => {
                 const user = result.user;
                 form.reset()
+                handleUserProfile(name, photoURL)
 
-
+                toast.success('Register Success')
 
             })
             .catch(error => {
@@ -41,7 +52,16 @@ const Register = () => {
     }
 
 
-
+    const handleUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        console.log(profile);
+        setuserProfile(profile)
+            .then((result) => { console.log(result.user); })
+            .catch(error => console.log(error))
+    }
     return (
         <div className='flex justify-center  '>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100  border shadow-4xl border-sky-400">
