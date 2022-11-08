@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 
@@ -8,6 +8,10 @@ const Register = () => {
     const { signUp, setuserProfile } = useContext(AuthContext)
     const [error, setError] = useState('')
 
+    const location = useLocation();
+    const frome = location.state?.from?.pathname || '/';
+
+    const navigate = useNavigate()
 
     const handleSubmit = e => {
 
@@ -37,7 +41,10 @@ const Register = () => {
                 const user = result.user;
                 form.reset()
                 handleUserProfile(name, photoURL)
+                setTimeout(() => {
+                    navigate(frome, { replace: true })
 
+                }, 1000);
                 toast.success('Register Success')
 
             })
@@ -45,9 +52,6 @@ const Register = () => {
                 console.log('error', error);
                 setError(error.message)
             })
-
-
-
 
     }
 

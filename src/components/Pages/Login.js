@@ -1,7 +1,7 @@
 import { sendPasswordResetEmail } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 ;
 
@@ -10,7 +10,10 @@ const Login = () => {
     const { signIn, auth, googleSignIn } = useContext(AuthContext)
     const [usermail, setUsermail] = useState('')
 
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
+    const navigate = useNavigate()
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
@@ -23,7 +26,10 @@ const Login = () => {
                 form.reset()
                 toast.success('Login Success')
 
+                setTimeout(() => {
+                    navigate(from, { replace: true })
 
+                }, 500);
             })
             .catch(error => {
                 if (error.message === 'Firebase: Error (auth/wrong-password).') {
@@ -43,7 +49,10 @@ const Login = () => {
             .then(result => {
                 toast.success('Logined SuccessFully')
 
+                setTimeout(() => {
+                    navigate(from, { replace: true })
 
+                }, 500);
             })
             .catch(error => {
                 console.log('error', error);
