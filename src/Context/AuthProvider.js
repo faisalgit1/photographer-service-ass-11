@@ -46,7 +46,18 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, profile)
     }
 
+    // On Auth state Change
+    useEffect(() => {
 
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            setLoading(false)
+            setuser(currentUser)
+
+        })
+
+        return () => unsubscribe()
+
+    },)
 
     // Log out
     const logOut = () => {
