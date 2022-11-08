@@ -11,9 +11,11 @@ const firebaseConfig = {
     storageBucket: "photographer-with-node-mongodb.appspot.com",
     messagingSenderId: "599989507775",
     appId: "1:599989507775:web:a014d15dcbc0aaaf3a180a"
+
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 
 export default app
