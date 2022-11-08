@@ -1,11 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-
+import { AuthContext } from '../../Context/AuthProvider';
 
 
 const Register = () => {
+    const { signUp } = useContext(AuthContext)
+    const [error, setError] = useState('')
 
+
+
+    const handleSubmit = e => {
+
+        e.preventDefault()
+        const form = e.target;
+        const name = form.name.value;
+        const photoURL = form.photourl.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(name, photoURL, email, password);
+
+        setError('');
+        signUp(email, password)
+            .then(result => {
+                const user = result.user;
+                form.reset()
+
+
+
+            })
+            .catch(error => {
+                console.log('error', error);
+                setError(error.message)
+            })
+
+
+
+
+    }
 
 
 
@@ -13,7 +46,7 @@ const Register = () => {
         <div className='flex justify-center  '>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100  border shadow-4xl border-sky-400">
                 <h1 className="text-2xl font-bold text-center">Register</h1>
-                <form novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleSubmit} novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <label for="username" className="block font-bold dark:text-gray-400">Name</label>
                         <input type="text" name="name" id="name" placeholder="Name" className="w-full px-4 py-3 rounded-md bg-sky-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
@@ -34,7 +67,7 @@ const Register = () => {
                         </div>
                     </div>
                     <div>
-                        <p className="text-red-500"></p>
+                        <p className="text-red-500">{error}</p>
                     </div>
                     <button className="block w-full  p-3 text-center rounded-sm dark:text-red-900 bg-violet-400 hover:bg-violet-700">Sign Up</button>
                 </form>
