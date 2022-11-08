@@ -1,11 +1,41 @@
 
-import React from 'react';
-
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-
+import { AuthContext } from '../../Context/AuthProvider';
 ;
 
 const Login = () => {
+    const [error, setError] = useState(null)
+    const { signIn, auth, googleSignIn } = useContext(AuthContext)
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset()
+                toast.success('Login Success')
+
+
+            })
+            .catch(error => {
+                if (error.message === 'Firebase: Error (auth/wrong-password).') {
+                    setError('Wrong Password')
+                }
+                else if (error.message === 'Firebase: Error (auth/user-not-found).') {
+                    setError('User Not Found.Please Register')
+                }
+                else {
+                    setError(error.message)
+                }
+                console.log('error', error);
+            })
+    }
 
 
 
@@ -14,7 +44,7 @@ const Login = () => {
         <div className='flex justify-center  '>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100  border shadow-4xl border-sky-400">
                 <h1 className="text-2xl font-bold text-center">Login</h1>
-                <form novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleSubmit} novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <label for="username" className="block dark:text-gray-400">Email</label>
                         <input type="text" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 bg-sky-200 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
@@ -29,7 +59,7 @@ const Login = () => {
                     <button className="block w-full  p-3 text-center rounded-sm dark:text-red-900 bg-violet-400 hover:bg-violet-700">Sign In</button>
                 </form>
                 <div>
-                    <p className="text-red-500"></p>
+                    <p className="text-red-500">{error}</p>
                 </div>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
