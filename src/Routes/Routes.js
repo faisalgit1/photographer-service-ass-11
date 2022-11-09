@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Blogs from '../components/Pages/Blogs';
+import ErrorPage from '../components/Pages/ErrorPage';
 import Home from '../components/Pages/Home';
 
 import Login from '../components/Pages/Login'
@@ -13,14 +14,15 @@ import Main from '../layout/Main';
 const routes = createBrowserRouter([{
     path: '/',
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
         {
             path: '/',
             element: <Home></Home>
         },
         {
-            path: '/phographer-select',
-            loader: () => fetch('http://localhost:5000/data'),
+            path: '/chose-photos',
+            loader: () => fetch('https://server-assignment-11-faisalgit1.vercel.app/chose-photos'),
             element: <PhotographerCards></PhotographerCards>
         },
         {

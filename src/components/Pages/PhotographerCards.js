@@ -8,12 +8,14 @@ const PhotographerCards = () => {
     return (
         <div>
             <h1 className='text-2xl'>We have 6 items Service</h1>
-            {
-                datas.map(data => <SingleCards
-                    key={data.id}
-                    data={data}
-                ></SingleCards>)
-            }
+            <div className="grid grid-cols-1 md:grid-cols-3 px-4 md:px-10">
+                {
+                    datas.map(data => <SingleCards
+                        key={data.id}
+                        data={data}
+                    ></SingleCards>)
+                }
+            </div>
         </div>
     );
 };
