@@ -1,4 +1,6 @@
 import React from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from 'react-router-dom';
 
 const SingleCards = ({ data }) => {
@@ -6,7 +8,12 @@ const SingleCards = ({ data }) => {
     return (
         <div className=' mb-2 mr-2.5 border border-green-600 bg-teal-100 rounded '>
             <div className="  gap-2 p-6 rounded-md border  shadow-md dark:bg-gray-900 dark:text-gray-50">
-                <img src={img} alt="" className="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500" />
+                <PhotoProvider>
+                    <PhotoView src={img}>
+                        <img src={img} alt="" className="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500" />
+                    </PhotoView>
+                </PhotoProvider>
+
                 <div className="mt-6 mb-3">
                     <h2 className="text-xl text-center text-gray-800 font-bold tracking-wide">{name}</h2>
                 </div>
