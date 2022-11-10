@@ -43,6 +43,16 @@ const Header = () => {
                             isActive ? ' text-green-500' : undefined
                         } to='/blog'>Blogs</NavLink >
                     </li>
+                    <li className='font-semibold my-2 mr-4'>
+                        <NavLink className={({ isActive }) =>
+                            isActive ? ' text-green-500' : undefined
+                        } to='/my-review'>My Review</NavLink >
+                    </li>
+                    <li className='font-semibold my-2 mr-4'>
+                        <NavLink className={({ isActive }) =>
+                            isActive ? ' text-green-500' : undefined
+                        } to='/add-service'>Add Service</NavLink >
+                    </li>
 
 
 

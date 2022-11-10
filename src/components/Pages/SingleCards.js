@@ -4,7 +4,7 @@ import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from 'react-router-dom';
 
 const SingleCards = ({ data }) => {
-    const { name, price, details, img, ratings } = data
+    const { name, price, details, img, ratings, _id } = data
     return (
         <div className=' mb-2 mr-2.5 border border-green-600 bg-teal-100 rounded '>
             <div className="  gap-2 p-6 rounded-md border  shadow-md dark:bg-gray-900 dark:text-gray-50">
@@ -29,7 +29,7 @@ const SingleCards = ({ data }) => {
                     <p className="dark:text-gray-800 text-gray-800">{details ? details.slice(0, 200) + "..." : details}</p>
                 </div>
                 <div className='text-center'>
-                    <Link to='/photo-details'><button className="px-3 py-1 md:my-0 mt-2 font-semibold rounded  text-white bg-sky-700 mr-2">View Details</button></Link>
+                    <Link to={`/chose-photos/${_id}`}><button className="px-3 py-1 md:my-0 mt-2 font-semibold rounded  text-white bg-sky-700 mr-2">View Details</button></Link>
                 </div>
 
             </div>

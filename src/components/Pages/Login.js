@@ -24,12 +24,24 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset()
-                toast.success('Login Success')
+                fetch('https://assignment-11-server-gilt.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('photoToken', data.token)
+                        toast.success('Login Success')
+                        setTimeout(() => {
+                            navigate(from, { replace: true })
 
-                setTimeout(() => {
-                    navigate(from, { replace: true })
+                        }, 500);
+                    })
 
-                }, 500);
+
             })
             .catch(error => {
                 if (error.message === 'Firebase: Error (auth/wrong-password).') {
@@ -47,12 +59,23 @@ const Login = () => {
     const handleGoogleSignIN = () => {
         googleSignIn()
             .then(result => {
-                toast.success('Logined SuccessFully')
+                const user = result.user;
+                fetch('https://server-assignment-11-faisalgit1.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('photoToken', data.token)
+                        toast.success('Logined SuccessFully')
+                        setTimeout(() => {
+                            navigate(from, { replace: true })
 
-                setTimeout(() => {
-                    navigate(from, { replace: true })
-
-                }, 500);
+                        }, 500);
+                    })
             })
             .catch(error => {
                 console.log('error', error);
