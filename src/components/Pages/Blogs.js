@@ -1,6 +1,8 @@
 import React from 'react';
+import Title from '../Hook/Title';
 
 const Blogs = () => {
+    Title('Blog')
     return (
         <div>
             <div className='px-4 bg-white  text-slate-800 dark:text-white dark:bg-slate-900  md:px-20'>

@@ -1,7 +1,9 @@
 import React from 'react';
 import toast from 'react-hot-toast';
+import Title from '../Hook/Title';
 
 const AddPhotoService = () => {
+    Title('Add Service')
     const handleSubmit = e => {
         e.preventDefault()
         const form = e.target;

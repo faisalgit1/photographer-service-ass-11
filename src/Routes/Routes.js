@@ -6,9 +6,12 @@ import ErrorPage from '../components/Pages/ErrorPage';
 import Home from '../components/Pages/Home';
 
 import Login from '../components/Pages/Login'
+import MyReview from '../components/Pages/MyReview';
 import PhotoDetails from '../components/Pages/PhotoDetails';
 import PhotographerCards from '../components/Pages/PhotographerCards';
+import PrivateRoute from '../components/Pages/PrivateRoute';
 import Register from '../components/Pages/Register'
+import UpdateReview from '../components/Pages/UpdateReview';
 
 import Main from '../layout/Main';
 
@@ -47,7 +50,16 @@ const routes = createBrowserRouter([{
         },
         {
             path: '/add-service',
-            element: <AddPhotoService></AddPhotoService>
+            element: <PrivateRoute><AddPhotoService></AddPhotoService></PrivateRoute>
+        },
+        {
+            path: '/my-review',
+            element: <PrivateRoute><MyReview></MyReview></PrivateRoute>
+        },
+        {
+            path: '/update-review/:id',
+            loader: ({ params }) => fetch(`https://server-assignment-11-faisalgit1.vercel.app/allreview/${params.id}`),
+            element: <PrivateRoute><UpdateReview></UpdateReview></PrivateRoute>
         }
     ]
 }])

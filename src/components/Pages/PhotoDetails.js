@@ -5,9 +5,11 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import Title from '../Hook/Title';
 import AddReview from './AddReview';
 
 const PhotoDetails = () => {
+    Title('Details')
     const data = useLoaderData()
     const { name, price, _id, details, img, ratings } = data
 
@@ -90,7 +92,7 @@ const PhotoDetails = () => {
                         <>
                             <form onSubmit={handleSubmit} className='flex  gap-3 my-10 items-center'>
                                 <img className='w-12 rounded-full' src={user?.photoURL} alt="" />
-                                <input name='review' type="text" placeholder="Type Your Review" className="input input-bordered w-60 md:w-96" />
+                                <input name='review' type="text" placeholder="Type Your Review" className="input p-2 input-bordered w-60 md:w-96" />
                                 <button type='submit'>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 hover:text-gray-700 text-gray-900 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />

@@ -3,9 +3,11 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import Title from '../Hook/Title';
 ;
 
 const Login = () => {
+    Title('Login')
     const [error, setError] = useState(null)
     const { signIn, auth, googleSignIn } = useContext(AuthContext)
     const [usermail, setUsermail] = useState('')
@@ -24,7 +26,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset()
-                fetch('https://assignment-11-server-gilt.vercel.app/jwt', {
+                fetch('https://server-assignment-11-faisalgit1.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -103,7 +105,7 @@ const Login = () => {
 
 
     return (
-        <div className='flex justify-center  '>
+        <div className='flex justify-center mt-10 mb-10  '>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100  border shadow-4xl border-sky-400">
                 <h1 className="text-2xl font-bold text-center">Login</h1>
                 <form onSubmit={handleSubmit} novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
