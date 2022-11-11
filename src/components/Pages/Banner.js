@@ -11,7 +11,7 @@ const Banner = () => {
 
                     </div>
                 </div>
-                <img src="https://cdn.pixabay.com/photo/2019/02/15/18/26/crystal-ball-photography-3999047__340.jpg" alt="" className="w-3/4 mx-auto mb-12 -mt-20 rounded-lg shadow-md lg:-mt-40 dark:bg-gray-500" />
+                <img src="https://img.freepik.com/free-vector/cartoon-couple-famous-celebrities-red-carpet-with-paparazzi_33099-657.jpg?size=626&ext=jpg&ga=GA1.2.245939490.1665506832" alt="" className="w-3/4 mx-auto mb-12 -mt-20 rounded-lg shadow-md lg:-mt-40 dark:bg-gray-500" />
             </section>
         </div>
     );

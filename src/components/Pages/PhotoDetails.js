@@ -103,7 +103,7 @@ const PhotoDetails = () => {
                         </>
                         :
                         <>
-                            <p className="font-semibold my-10 ">
+                            <p className="h-screen font-semibold my-10 ">
 
                                 Please <Link className='underline' to='/login'>Login</Link> to add a review
                             </p>
